@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.16'
+}
+
+group 'com.github.lppedd'
+version '0.1.0'
+
+sourceCompatibility = JavaVersion.VERSION_12
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:0.2.0'
+}
+
+intellij {
+    version 'IU-2019.2'
+}
+
+patchPluginXml {
+    version project.version
+    sinceBuild '192'
+    untilBuild '201.*'
+    changeNotes = new File("change_notes/${version.replace('.', '_')}.html").getText('UTF-8')
+    pluginDescription = new File("plugin_description.html").getText('UTF-8')
+}
+
+compileJava {
+    options.compilerArgs = [
+            "--release", "8" // Avoid using Java 12 APIs
+    ]
+}

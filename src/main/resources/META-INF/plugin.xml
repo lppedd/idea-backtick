@@ -1,0 +1,18 @@
+<idea-plugin>
+  <id>com.github.lppedd.idea-backtick</id>
+  <name>Backtick</name>
+  <vendor
+      email="lp.edoardo@gmail.com"
+      url="https://github.com/lppedd/idea-backtick"
+  >
+    Edoardo Luppi
+  </vendor>
+
+  <depends>com.intellij.modules.platform</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <intentionAction>
+      <className>com.github.lppedd.backtick.BacktickIntentionAction</className>
+    </intentionAction>
+  </extensions>
+</idea-plugin>
