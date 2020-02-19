@@ -13,6 +13,8 @@
   <extensions defaultExtensionNs="com.intellij">
     <intentionAction order="first">
       <className>com.github.lppedd.backtick.BacktickIntentionAction</className>
+      <category>Other</category>
+      <descriptionDirectoryName>BacktickIntention</descriptionDirectoryName>
     </intentionAction>
   </extensions>
 </idea-plugin>
