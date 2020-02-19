@@ -12,6 +12,8 @@ Looking for the latest **plugin binaries**? Get them [here][1] as `.zip`
 This plugin allows wrapping text in backticks (`) via an _intention action_.  
 It supports multiple carets.
 
+<img src="https://raw.githubusercontent.com/lppedd/idea-backtick/master/images/usage_example.gif" alt="Usage example">
+
 ## Author
 
  - Edoardo Luppi (<lp.edoardo@gmail.com>)
