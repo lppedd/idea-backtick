@@ -66,24 +66,18 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
   /**
    * Returns if the unwrapping intention is available for the selected piece of text.
    */
-  @SuppressWarnings("DuplicatedCode")
   private static boolean isAvailableForSelection(@NotNull final Caret caret) {
-    final var selectionStart = caret.getSelectionStart() - 1;
-    final var selectionEnd = caret.getSelectionEnd() + 1;
     final var documentText = caret.getEditor().getDocument().getText();
-    final var wrappedText = documentText.substring(
-        Math.max(selectionStart, 0),
-        Math.min(selectionEnd, documentText.length() - 1)
-    );
-    final var lastCharIndex = wrappedText.length() - 1;
-    return wrappedText.charAt(0) == BACKTICK && wrappedText.charAt(lastCharIndex) == BACKTICK;
+    final var selectionStart = Math.max(caret.getSelectionStart() - 1, 0);
+    final var selectionEnd = Math.min(caret.getSelectionEnd(), documentText.length() - 1);
+    return documentText.charAt(selectionStart) == BACKTICK &&
+           documentText.charAt(selectionEnd) == BACKTICK;
   }
 
   /**
    * Returns if the unwrapping intention is available at the caret position,
    * without any selection.
    */
-  @SuppressWarnings("DuplicatedCode")
   private static boolean isAvailableWithoutSelection(@NotNull final Caret caret) {
     final var documentText = caret.getEditor().getDocument().getText();
     final var lineText = getLineAtCaret(caret, documentText);
@@ -105,15 +99,11 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
    * This method handles cases such as {@code `|a text piece|`}
    * where {@code |} represents a selection's start and end.
    */
-  @SuppressWarnings("DuplicatedCode")
   private static void unwrapWithSelection(@NotNull final Caret caret) {
-    final var selectionStart = caret.getSelectionStart() - 1;
-    final var selectionEnd = caret.getSelectionEnd() + 1;
     final var documentText = caret.getEditor().getDocument().getText();
-    final var wrappedText = documentText.substring(
-        Math.max(selectionStart, 0),
-        Math.min(selectionEnd, documentText.length() - 1)
-    );
+    final var selectionStart = Math.max(caret.getSelectionStart() - 1, 0);
+    final var selectionEnd = Math.min(caret.getSelectionEnd() + 1, documentText.length());
+    final var wrappedText = documentText.substring(selectionStart, selectionEnd);
     final var lastCharIndex = wrappedText.length() - 1;
 
     if (wrappedText.charAt(0) != BACKTICK || wrappedText.charAt(lastCharIndex) != BACKTICK) {
@@ -135,7 +125,6 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
    * must be on the same line.
    * </strong>
    */
-  @SuppressWarnings("DuplicatedCode")
   private static void unwrapWithoutSelection(@NotNull final Caret caret) {
     final var documentText = caret.getEditor().getDocument().getText();
     final var lineText = getLineAtCaret(caret, documentText);
