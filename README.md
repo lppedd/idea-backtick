@@ -9,9 +9,10 @@ Looking for the latest **plugin binaries**? Get them [here][1] as `.zip`
 
 -----
 
-This plugin allows wrapping text in backticks (`) via an _intention action_.  
+This plugin allows wrapping and unwrapping text in backticks (`) via _intention actions_.  
 It supports multiple carets.
 
+Wrapping and unwrapping example:  
 <img src="https://raw.githubusercontent.com/lppedd/idea-backtick/master/images/usage_example.gif" alt="Usage example">
 
 ## Author

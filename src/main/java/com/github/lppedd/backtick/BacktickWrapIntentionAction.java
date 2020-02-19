@@ -1,5 +1,7 @@
 package com.github.lppedd.backtick;
 
+import static com.github.lppedd.backtick.BacktickConstants.BACKTICK;
+
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nls.Capitalization;
 import org.jetbrains.annotations.NotNull;
@@ -11,16 +13,16 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 
 /**
+ * Handles wrapping a selected piece of text with backticks.
+ *
  * @author Edoardo Luppi
  */
-class BacktickIntentionAction implements IntentionAction {
-  private static final String BACKTICK = "\u0060";
-
+class BacktickWrapIntentionAction implements IntentionAction {
   @Nls(capitalization = Capitalization.Sentence)
   @NotNull
   @Override
   public String getText() {
-    return BacktickBundle.message("backtick.title");
+    return BacktickBundle.message("backtick.wrap.title");
   }
 
   @Nls(capitalization = Capitalization.Sentence)
@@ -45,7 +47,7 @@ class BacktickIntentionAction implements IntentionAction {
       final PsiFile file) {
     editor.getCaretModel()
           .getAllCarets()
-          .forEach(this::wrapInBackticks);
+          .forEach(BacktickWrapIntentionAction::wrapInBackticks);
   }
 
   @Override
@@ -53,15 +55,15 @@ class BacktickIntentionAction implements IntentionAction {
     return true;
   }
 
-  private void wrapInBackticks(@NotNull final Caret caret) {
+  private static void wrapInBackticks(@NotNull final Caret caret) {
     final var selectedText = caret.getSelectedText();
+    final var wrappedText = BACKTICK + (selectedText != null ? selectedText : "") + BACKTICK;
     final var selectionStart = caret.getSelectionStart();
     final var selectionEnd = caret.getSelectionEnd();
-    final var newText = BACKTICK + (selectedText != null ? selectedText : "") + BACKTICK;
 
     caret.getEditor()
          .getDocument()
-         .replaceString(selectionStart, selectionEnd, newText);
+         .replaceString(selectionStart, selectionEnd, wrappedText);
 
     final var newCaretOffset = selectionEnd + 1;
 

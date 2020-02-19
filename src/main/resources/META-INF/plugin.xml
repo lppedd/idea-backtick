@@ -11,10 +11,21 @@
   <depends>com.intellij.modules.platform</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <intentionAction order="first">
-      <className>com.github.lppedd.backtick.BacktickIntentionAction</className>
-      <category>Other</category>
-      <descriptionDirectoryName>BacktickIntention</descriptionDirectoryName>
+    <intentionAction
+        id="com.github.lppedd.backtick.intention.wrap"
+        order="first, after com.github.lppedd.backtick.intention.unwrap"
+    >
+      <className>com.github.lppedd.backtick.BacktickWrapIntentionAction</className>
+      <category>Other/Backtick</category>
+      <descriptionDirectoryName>BacktickWrapIntention</descriptionDirectoryName>
+    </intentionAction>
+    <intentionAction
+        id="com.github.lppedd.backtick.intention.unwrap"
+        order="first, before com.github.lppedd.backtick.intention.wrap"
+    >
+      <className>com.github.lppedd.backtick.BacktickUnwrapIntentionAction</className>
+      <category>Other/Backtick</category>
+      <descriptionDirectoryName>BacktickUnwrapIntention</descriptionDirectoryName>
     </intentionAction>
   </extensions>
 </idea-plugin>
