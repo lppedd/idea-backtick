@@ -7,7 +7,8 @@ Looking for the latest **plugin binaries**? Get them [here][1] as `.zip`
 
 -----
 
-This plugin allows wrapping text in backticks (`) via an _intention action_.
+This plugin allows wrapping text in backticks (`) via an _intention action_.  
+It supports multiple carets.
 
 ## Author
 
