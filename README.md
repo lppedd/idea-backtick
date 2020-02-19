@@ -2,6 +2,8 @@
 
 # Backtick
 
+### Available @ [JetBrains Plugins Repository][2]
+
 Looking for the latest **plugin binaries**? Get them [here][1] as `.zip`  
 <small>Supported IDE versions: `192.*` to `201.*` (both inclusive)</small> 
 
@@ -15,3 +17,4 @@ It supports multiple carets.
  - Edoardo Luppi (<lp.edoardo@gmail.com>)
 
 [1]: https://github.com/lppedd/idea-backtick/releases
+[2]: https://plugins.jetbrains.com/plugin/13817-backtick
