@@ -27,5 +27,14 @@
       <category>Other/Backtick</category>
       <descriptionDirectoryName>BacktickUnwrapIntention</descriptionDirectoryName>
     </intentionAction>
+
+    <!-- @formatter:off -->
+    <lang.unwrapDescriptor order="first" language="XML" implementationClass="com.github.lppedd.backtick.unwrapper.XmlBacktickUnwrapDescriptor" />
+    <lang.unwrapDescriptor order="first" language="HTML" implementationClass="com.github.lppedd.backtick.unwrapper.XmlBacktickUnwrapDescriptor" />
+    <lang.unwrapDescriptor order="first" language="XHTML" implementationClass="com.github.lppedd.backtick.unwrapper.XmlBacktickUnwrapDescriptor" />
+    <!-- @formatter:on -->
   </extensions>
+
+  <depends optional="true" config-file="java.xml">com.intellij.java</depends>
+  <depends optional="true" config-file="javascript.xml">JavaScript</depends>
 </idea-plugin>

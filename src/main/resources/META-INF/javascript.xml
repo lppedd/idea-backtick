@@ -1,0 +1,7 @@
+<idea-plugin>
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- @formatter:off -->
+    <lang.unwrapDescriptor order="first" language="JavaScript" implementationClass="com.github.lppedd.backtick.unwrapper.JavascriptBacktickUnwrapDescriptor" />
+    <!-- @formatter:on -->
+  </extensions>
+</idea-plugin>

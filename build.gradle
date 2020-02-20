@@ -20,6 +20,10 @@ dependencies {
 
 intellij {
     version 'IU-2019.2'
+    plugins = [
+            'java',
+            'JavaScriptLanguage',
+    ]
 }
 
 patchPluginXml {
