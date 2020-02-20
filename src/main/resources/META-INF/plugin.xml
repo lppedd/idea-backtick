@@ -15,7 +15,7 @@
         id="com.github.lppedd.backtick.intention.wrap"
         order="first, after com.github.lppedd.backtick.intention.unwrap"
     >
-      <className>com.github.lppedd.backtick.BacktickWrapIntentionAction</className>
+      <className>com.github.lppedd.backtick.intentions.BacktickWrapIntentionAction</className>
       <category>Other/Backtick</category>
       <descriptionDirectoryName>BacktickWrapIntention</descriptionDirectoryName>
     </intentionAction>
@@ -23,7 +23,7 @@
         id="com.github.lppedd.backtick.intention.unwrap"
         order="first, before com.github.lppedd.backtick.intention.wrap"
     >
-      <className>com.github.lppedd.backtick.BacktickUnwrapIntentionAction</className>
+      <className>com.github.lppedd.backtick.intentions.BacktickUnwrapIntentionAction</className>
       <category>Other/Backtick</category>
       <descriptionDirectoryName>BacktickUnwrapIntention</descriptionDirectoryName>
     </intentionAction>

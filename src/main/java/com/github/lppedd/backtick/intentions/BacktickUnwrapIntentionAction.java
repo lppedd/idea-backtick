@@ -1,4 +1,4 @@
-package com.github.lppedd.backtick;
+package com.github.lppedd.backtick.intentions;
 
 import static com.github.lppedd.backtick.BacktickConstants.BACKTICK;
 
@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nls.Capitalization;
 import org.jetbrains.annotations.NotNull;
 
+import com.github.lppedd.backtick.BacktickBundle;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
