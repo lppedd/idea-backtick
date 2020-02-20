@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.PropertyKey;
 
-import com.intellij.CommonBundle;
+import com.intellij.BundleBase;
 import com.intellij.reference.SoftReference;
 
 /**
@@ -28,7 +28,7 @@ public class BacktickBundle {
   public static String message(
       @NotNull @PropertyKey(resourceBundle = BUNDLE) final String key,
       @NotNull final Object... params) {
-    return CommonBundle.message(getBundle(), key, params);
+    return BundleBase.message(getBundle(), key, params);
   }
 
   private static ResourceBundle getBundle() {
