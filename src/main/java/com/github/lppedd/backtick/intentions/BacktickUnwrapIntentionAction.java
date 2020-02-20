@@ -83,7 +83,7 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
     final var documentText = caret.getEditor().getDocument().getText();
     final var lineText = getLineAtCaret(caret, documentText);
     final var caretLineColumn = caret.getOffset() - caret.getVisualLineStart();
-    final var startBacktickIndex = lineText.lastIndexOf(BACKTICK, caretLineColumn);
+    final var startBacktickIndex = lineText.lastIndexOf(BACKTICK, caretLineColumn - 1);
     final var endBacktickIndex = lineText.indexOf(BACKTICK, caretLineColumn);
     return startBacktickIndex != -1 && endBacktickIndex != -1;
   }
