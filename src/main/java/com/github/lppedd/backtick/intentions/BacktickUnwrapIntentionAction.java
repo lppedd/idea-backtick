@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nls.Capitalization;
 import org.jetbrains.annotations.NotNull;
 
 import com.github.lppedd.backtick.BacktickBundle;
+import com.github.lppedd.backtick.BacktickUtil;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
@@ -81,7 +82,7 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
    */
   private static boolean isAvailableWithoutSelection(@NotNull final Caret caret) {
     final var documentText = caret.getEditor().getDocument().getText();
-    final var lineText = getLineAtCaret(caret, documentText);
+    final var lineText = BacktickUtil.getLineAtCaret(caret, documentText);
     final var caretLineColumn = caret.getOffset() - caret.getVisualLineStart();
     final var startBacktickIndex = lineText.lastIndexOf(BACKTICK, caretLineColumn - 1);
     final var endBacktickIndex = lineText.indexOf(BACKTICK, caretLineColumn);
@@ -128,7 +129,7 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
    */
   private static void unwrapWithoutSelection(@NotNull final Caret caret) {
     final var documentText = caret.getEditor().getDocument().getText();
-    final var lineText = getLineAtCaret(caret, documentText);
+    final var lineText = BacktickUtil.getLineAtCaret(caret, documentText);
     final var caretLineColumn = caret.getSelectionStartPosition().column;
     final var startBacktickIndex = lineText.lastIndexOf(BACKTICK, caretLineColumn - 1);
     final var endBacktickIndex = lineText.indexOf(BACKTICK, caretLineColumn) + 1;
@@ -143,17 +144,6 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
     final var startOffset = caretOffset - caretLineColumn + startBacktickIndex;
     final var endOffset = caretOffset + endBacktickIndex - caretLineColumn;
     replaceAndUpdateSelection(caret, startOffset, endOffset, unwrappedText);
-  }
-
-  /**
-   * Returns the entire line of a document's text given a caret position.
-   */
-  private static String getLineAtCaret(
-      @NotNull final Caret caret,
-      @NotNull final String documentText) {
-    final var lineStartOffset = caret.getVisualLineStart();
-    final var lineEndOffset = caret.getVisualLineEnd();
-    return documentText.substring(lineStartOffset, lineEndOffset);
   }
 
   /**
