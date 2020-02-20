@@ -113,7 +113,7 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
     }
 
     final var unwrappedText = wrappedText.substring(1, lastCharIndex);
-    replaceAndUpdateSelection(caret, selectionStart, selectionEnd, unwrappedText);
+    BacktickUtil.replaceAndUpdateSelection(caret, selectionStart, selectionEnd, unwrappedText);
   }
 
   /**
@@ -143,23 +143,6 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
     final var caretOffset = caret.getOffset();
     final var startOffset = caretOffset - caretLineColumn + startBacktickIndex;
     final var endOffset = caretOffset + endBacktickIndex - caretLineColumn;
-    replaceAndUpdateSelection(caret, startOffset, endOffset, unwrappedText);
-  }
-
-  /**
-   * Replaces the text demarcated by the start and end offset with a new text,
-   * updating the selection to cover the new text and moving the caret at its end.
-   */
-  private static void replaceAndUpdateSelection(
-      @NotNull final Caret caret,
-      final int startOffset,
-      final int endOffset,
-      @NotNull final String newText) {
-    final var newTextLength = newText.length();
-    caret.getEditor()
-         .getDocument()
-         .replaceString(startOffset, endOffset, newText);
-    caret.moveToOffset(startOffset + newTextLength, true);
-    caret.setSelection(startOffset, startOffset + newTextLength);
+    BacktickUtil.replaceAndUpdateSelection(caret, startOffset, endOffset, unwrappedText);
   }
 }

@@ -60,4 +60,21 @@ public final class BacktickUtil {
     copy.addAll(Arrays.asList(others));
     return copy;
   }
+
+  /**
+   * Replaces the text demarcated by the start and end offset with a new text,
+   * updating the selection to cover the new text and moving the caret at its end.
+   */
+  public static void replaceAndUpdateSelection(
+      @NotNull final Caret caret,
+      final int startOffset,
+      final int endOffset,
+      @NotNull final String newText) {
+    final var newTextLength = newText.length();
+    caret.getEditor()
+         .getDocument()
+         .replaceString(startOffset, endOffset, newText);
+    caret.moveToOffset(startOffset + newTextLength, true);
+    caret.setSelection(startOffset, startOffset + newTextLength);
+  }
 }
