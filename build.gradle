@@ -23,6 +23,7 @@ intellij {
     plugins = [
             'java',
             'Kotlin',
+            'Pythonid:2019.2.192.5728.98',
             'JavaScriptLanguage',
     ]
 }
