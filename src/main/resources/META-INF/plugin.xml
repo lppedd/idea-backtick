@@ -29,6 +29,7 @@
     </intentionAction>
 
     <!-- @formatter:off -->
+    <lang.unwrapDescriptor order="first" language="TEXT" implementationClass="com.github.lppedd.backtick.unwrapper.TextBacktickUnwrapDescriptor" />
     <lang.unwrapDescriptor order="first" language="XML" implementationClass="com.github.lppedd.backtick.unwrapper.XmlBacktickUnwrapDescriptor" />
     <lang.unwrapDescriptor order="first" language="HTML" implementationClass="com.github.lppedd.backtick.unwrapper.XmlBacktickUnwrapDescriptor" />
     <lang.unwrapDescriptor order="first" language="XHTML" implementationClass="com.github.lppedd.backtick.unwrapper.XmlBacktickUnwrapDescriptor" />
