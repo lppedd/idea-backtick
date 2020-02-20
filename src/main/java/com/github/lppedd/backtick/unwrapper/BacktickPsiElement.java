@@ -1,7 +1,6 @@
 package com.github.lppedd.backtick.unwrapper;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
@@ -12,8 +11,8 @@ import com.intellij.psi.impl.FakePsiElement;
  * @author Edoardo Luppi
  */
 class BacktickPsiElement extends FakePsiElement {
-  private final PsiElement parent;
-  private final TextRange textRange;
+  @NotNull private final PsiElement parent;
+  @NotNull private final TextRange textRange;
 
   private BacktickPsiElement(
       @NotNull final PsiElement parent,
@@ -22,6 +21,7 @@ class BacktickPsiElement extends FakePsiElement {
     this.textRange = textRange;
   }
 
+  @NotNull
   @Override
   public PsiElement getParent() {
     return parent;
@@ -33,7 +33,7 @@ class BacktickPsiElement extends FakePsiElement {
     return null;
   }
 
-  @Nullable
+  @NotNull
   @Override
   public TextRange getTextRange() {
     return textRange;

@@ -2,6 +2,7 @@ package com.github.lppedd.backtick.intentions;
 
 import static com.github.lppedd.backtick.BacktickConstants.BACKTICK;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nls.Capitalization;
 import org.jetbrains.annotations.NotNull;
@@ -68,6 +69,7 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
   /**
    * Returns if the unwrapping intention is available for the selected piece of text.
    */
+  @Contract(pure = true)
   private static boolean isAvailableForSelection(@NotNull final Caret caret) {
     final var documentText = caret.getEditor().getDocument().getText();
     final var selectionStart = Math.max(caret.getSelectionStart() - 1, 0);

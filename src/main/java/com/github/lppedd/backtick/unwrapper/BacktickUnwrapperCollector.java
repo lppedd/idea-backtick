@@ -5,6 +5,7 @@ import static com.github.lppedd.backtick.BacktickConstants.BACKTICK;
 import java.util.Collections;
 import java.util.List;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,6 +29,7 @@ final class BacktickUnwrapperCollector {
   }
 
   @NotNull
+  @Contract(pure = true)
   public static List<Pair<PsiElement, Unwrapper>> collectUnwrappers(
       @NotNull final Editor editor,
       @NotNull final PsiFile file) {
@@ -44,6 +46,7 @@ final class BacktickUnwrapperCollector {
    * Returns the text range of the selected piece of text plus the wrapping backticks.
    */
   @Nullable
+  @Contract(pure = true)
   private static TextRange getTextRangeWithSelection(@NotNull final Caret caret) {
     final var documentText = caret.getEditor().getDocument().getText();
     final var selectionStart = Math.max(caret.getSelectionStart(), 0);
@@ -59,6 +62,7 @@ final class BacktickUnwrapperCollector {
    * calculated starting from caret position, without any selection.
    */
   @Nullable
+  @Contract(pure = true)
   private static TextRange getTextRangeWithoutSelection(@NotNull final Caret caret) {
     final var lineText = CaretUtil.getLineAtCaret(caret);
     final var lineStart = caret.getVisualLineStart();

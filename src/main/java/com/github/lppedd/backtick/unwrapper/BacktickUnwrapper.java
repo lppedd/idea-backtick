@@ -18,7 +18,7 @@ import com.intellij.psi.PsiElement;
  */
 class BacktickUnwrapper implements Unwrapper {
   @Override
-  public boolean isApplicableTo(@NotNull final PsiElement e) {
+  public boolean isApplicableTo(@NotNull final PsiElement psiElement) {
     return true;
   }
 
@@ -29,10 +29,11 @@ class BacktickUnwrapper implements Unwrapper {
 
   @NotNull
   @Override
-  public String getDescription(@NotNull final PsiElement e) {
+  public String getDescription(@NotNull final PsiElement psiElement) {
     return BacktickBundle.message("backtick.unwrap.title");
   }
 
+  @NotNull
   @Override
   public PsiElement collectAffectedElements(
       @NotNull final PsiElement psiElement,
