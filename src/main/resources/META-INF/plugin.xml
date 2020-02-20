@@ -36,5 +36,6 @@
   </extensions>
 
   <depends optional="true" config-file="java.xml">com.intellij.java</depends>
+  <depends optional="true" config-file="kotlin.xml">org.jetbrains.kotlin</depends>
   <depends optional="true" config-file="javascript.xml">JavaScript</depends>
 </idea-plugin>

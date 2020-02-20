@@ -1,0 +1,7 @@
+<idea-plugin>
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- @formatter:off -->
+    <lang.unwrapDescriptor order="first" language="kotlin" implementationClass="com.github.lppedd.backtick.unwrapper.KotlinBacktickUnwrapDescriptor" />
+    <!-- @formatter:on -->
+  </extensions>
+</idea-plugin>
