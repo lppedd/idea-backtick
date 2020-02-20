@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nls.Capitalization;
 import org.jetbrains.annotations.NotNull;
 
 import com.github.lppedd.backtick.BacktickBundle;
-import com.github.lppedd.backtick.BacktickUtil;
+import com.github.lppedd.backtick.CaretUtil;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
@@ -81,8 +81,7 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
    * without any selection.
    */
   private static boolean isAvailableWithoutSelection(@NotNull final Caret caret) {
-    final var documentText = caret.getEditor().getDocument().getText();
-    final var lineText = BacktickUtil.getLineAtCaret(caret, documentText);
+    final var lineText = CaretUtil.getLineAtCaret(caret);
     final var caretLineColumn = caret.getOffset() - caret.getVisualLineStart();
     final var startBacktickIndex = lineText.lastIndexOf(BACKTICK, caretLineColumn - 1);
     final var endBacktickIndex = lineText.indexOf(BACKTICK, caretLineColumn);
@@ -113,7 +112,7 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
     }
 
     final var unwrappedText = wrappedText.substring(1, lastCharIndex);
-    BacktickUtil.replaceAndUpdateSelection(caret, selectionStart, selectionEnd, unwrappedText);
+    replaceAndUpdateSelection(caret, selectionStart, selectionEnd, unwrappedText);
   }
 
   /**
@@ -128,8 +127,7 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
    * </strong>
    */
   private static void unwrapWithoutSelection(@NotNull final Caret caret) {
-    final var documentText = caret.getEditor().getDocument().getText();
-    final var lineText = BacktickUtil.getLineAtCaret(caret, documentText);
+    final var lineText = CaretUtil.getLineAtCaret(caret);
     final var caretLineColumn = caret.getSelectionStartPosition().column;
     final var startBacktickIndex = lineText.lastIndexOf(BACKTICK, caretLineColumn - 1);
     final var endBacktickIndex = lineText.indexOf(BACKTICK, caretLineColumn) + 1;
@@ -143,6 +141,23 @@ class BacktickUnwrapIntentionAction implements IntentionAction {
     final var caretOffset = caret.getOffset();
     final var startOffset = caretOffset - caretLineColumn + startBacktickIndex;
     final var endOffset = caretOffset + endBacktickIndex - caretLineColumn;
-    BacktickUtil.replaceAndUpdateSelection(caret, startOffset, endOffset, unwrappedText);
+    replaceAndUpdateSelection(caret, startOffset, endOffset, unwrappedText);
+  }
+
+  /**
+   * Replaces the text demarcated by the start and end offset with a new text,
+   * updating the selection to cover the new text and moving the caret at its end.
+   */
+  private static void replaceAndUpdateSelection(
+      @NotNull final Caret caret,
+      final int startOffset,
+      final int endOffset,
+      @NotNull final String newText) {
+    final var newTextLength = newText.length();
+    caret.getEditor()
+         .getDocument()
+         .replaceString(startOffset, endOffset, newText);
+    caret.moveToOffset(startOffset + newTextLength, true);
+    caret.setSelection(startOffset, startOffset + newTextLength);
   }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.github.lppedd.backtick.BacktickUtil;
+import com.github.lppedd.backtick.CaretUtil;
 import com.intellij.codeInsight.unwrap.Unwrapper;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
@@ -48,7 +48,8 @@ final class BacktickUnwrapperCollector {
     final var documentText = caret.getEditor().getDocument().getText();
     final var selectionStart = Math.max(caret.getSelectionStart(), 0);
     final var selectionEnd = Math.min(caret.getSelectionEnd(), documentText.length() - 1);
-    return BacktickUtil.isBacktick(documentText, selectionStart - 1, selectionEnd)
+    return documentText.charAt(selectionStart - 1) == BACKTICK &&
+           documentText.charAt(selectionEnd) == BACKTICK
         ? TextRange.create(selectionStart, selectionEnd)
         : null;
   }
@@ -59,16 +60,13 @@ final class BacktickUnwrapperCollector {
    */
   @Nullable
   private static TextRange getTextRangeWithoutSelection(@NotNull final Caret caret) {
-    final var documentText = caret.getEditor().getDocument().getText();
-    final var lineText = BacktickUtil.getLineAtCaret(caret, documentText);
-    final var lineStartOffset = caret.getVisualLineStart();
-    final var caretLineColumn = caret.getOffset() - lineStartOffset;
+    final var lineText = CaretUtil.getLineAtCaret(caret);
+    final var lineStart = caret.getVisualLineStart();
+    final var caretLineColumn = caret.getOffset() - lineStart;
     final var startBacktickIndex = lineText.lastIndexOf(BACKTICK, caretLineColumn - 1);
     final var endBacktickIndex = lineText.indexOf(BACKTICK, caretLineColumn);
-    return startBacktickIndex != -1 && endBacktickIndex != -1 ?
-        TextRange.create(
-            lineStartOffset + startBacktickIndex + 1,
-            lineStartOffset + endBacktickIndex
-        ) : null;
+    return startBacktickIndex != -1 && endBacktickIndex != -1
+        ? TextRange.create(lineStart + startBacktickIndex + 1, lineStart + endBacktickIndex)
+        : null;
   }
 }

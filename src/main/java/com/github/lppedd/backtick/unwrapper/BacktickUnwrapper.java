@@ -7,8 +7,8 @@ import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 
 import com.github.lppedd.backtick.BacktickBundle;
-import com.github.lppedd.backtick.BacktickUtil;
 import com.intellij.codeInsight.unwrap.Unwrapper;
+import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
@@ -62,13 +62,26 @@ class BacktickUnwrapper implements Unwrapper {
     }
 
     final var textRange = psiElement.getTextRange();
-    BacktickUtil.replaceAndUpdateSelection(
-        editor.getCaretModel().getCurrentCaret(),
-        textRange.getStartOffset() - 1,
-        textRange.getEndOffset() + 1,
-        editor.getDocument().getText(textRange)
-    );
+    final var startOffset = textRange.getStartOffset() - 1;
+    final var newText = editor.getDocument().getText(textRange);
+    final var caret = editor.getCaretModel().getCurrentCaret();
+    replaceAndUpdateSelection(caret, startOffset, textRange.getEndOffset() + 1, newText);
 
     return Collections.emptyList();
+  }
+
+  /**
+   * Replaces the text demarcated by the start and end offset with a new text,
+   * updating the selection to cover the new text.
+   */
+  private static void replaceAndUpdateSelection(
+      @NotNull final Caret caret,
+      final int startOffset,
+      final int endOffset,
+      @NotNull final String newText) {
+    caret.getEditor()
+         .getDocument()
+         .replaceString(startOffset, endOffset, newText);
+    caret.setSelection(startOffset, startOffset + newText.length());
   }
 }
