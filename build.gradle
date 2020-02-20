@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.lppedd'
-version '1.0.0'
+version '1.0.1'
 
 sourceCompatibility = JavaVersion.VERSION_12
 
@@ -32,7 +32,7 @@ intellij {
 patchPluginXml {
     version project.version
     sinceBuild '192'
-    untilBuild '201.*'
+    untilBuild null
     changeNotes = new File("change_notes/${version.replace('.', '_')}.html").getText('UTF-8')
     pluginDescription = new File("plugin_description.html").getText('UTF-8')
 }
