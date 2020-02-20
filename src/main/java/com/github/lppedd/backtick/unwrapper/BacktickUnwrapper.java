@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.github.lppedd.backtick.BacktickBundle;
 import com.intellij.codeInsight.unwrap.Unwrapper;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.TextRange;
@@ -73,16 +74,22 @@ class BacktickUnwrapper implements Unwrapper {
 
   /**
    * Replaces the text demarcated by the start and end offset with a new text,
-   * updating the selection to cover the new text.
+   * updating the selection to cover the new text and moving the caret at its end.
    */
   private static void replaceAndUpdateSelection(
       @NotNull final Caret caret,
       final int startOffset,
       final int endOffset,
       @NotNull final String newText) {
+    final var newTextLength = newText.length();
     caret.getEditor()
          .getDocument()
          .replaceString(startOffset, endOffset, newText);
-    caret.setSelection(startOffset, startOffset + newText.length());
+    caret.setSelection(startOffset, startOffset + newTextLength);
+
+    // Workaround to wait for the unwrap handler to move the caret first,
+    // only then we should move it
+    ApplicationManager.getApplication()
+                      .invokeLater(() -> caret.moveToOffset(startOffset + newTextLength, true));
   }
 }
