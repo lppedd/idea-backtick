@@ -3,7 +3,6 @@ package com.github.lppedd.backtick;
 import static com.github.lppedd.backtick.BacktickConstants.BACKTICK;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -49,15 +48,12 @@ public final class BacktickUtil {
   /**
    * Creates a new list by joining the input elements.
    */
-  @SafeVarargs
   @Contract(pure = true)
-  public static <T> List<T> addAll(
+  public static <T> List<T> joinCollections(
       @NotNull final Collection<T> first,
-      @NotNull final Collection<T> second,
-      @NotNull final T... others) {
+      @NotNull final Collection<T> second) {
     final var copy = new ArrayList<>(first);
     copy.addAll(second);
-    copy.addAll(Arrays.asList(others));
     return copy;
   }
 

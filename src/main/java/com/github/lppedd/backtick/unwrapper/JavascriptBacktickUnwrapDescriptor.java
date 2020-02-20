@@ -25,7 +25,7 @@ class JavascriptBacktickUnwrapDescriptor extends JavaScriptUnwrapDescriptor {
       @NotNull final PsiFile file) {
     final var backtickUnwrappers = BacktickUnwrapperCollector.collectUnwrappers(editor, file);
     final var originalUnwrappers = super.collectUnwrappers(project, editor, file);
-    return BacktickUtil.addAll(backtickUnwrappers, originalUnwrappers);
+    return BacktickUtil.joinCollections(backtickUnwrappers, originalUnwrappers);
   }
 
   @Override
