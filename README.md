@@ -23,6 +23,10 @@ The idea was born because of the **inaccessibility of the backtick symbol in Win
 - **Unwrapping** via `Code > Unwrap/Remove`:
 
   <img src="https://raw.githubusercontent.com/lppedd/idea-backtick/master/images/unwrap_cur_example.gif" alt="Usage example">
+  
+- **Unwrapping** inside a **Java** file via `Code > Unwrap/Remove`:
+
+  <img src="https://raw.githubusercontent.com/lppedd/idea-backtick/master/images/unwrap_cur_java_example.gif" alt="Usage example">
 
 ## Author
 
